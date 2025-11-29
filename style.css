@@ -1,0 +1,319 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  overflow: hidden;
+  font-family: "Montserrat", sans-serif;
+  background: radial-gradient(circle at top, #1d2340 0%, #050712 55%, #010109 100%);
+  color: #f5f5ff;
+}
+
+.logo {
+  position: absolute;
+  top: 28px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  text-align: center;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-weight: 300;
+  z-index: 20;
+}
+
+.logo span {
+  display: block;
+  margin-top: 4px;
+  font-size: 11px;
+  color: #ff9b4a;
+  letter-spacing: 3px;
+}
+
+input[type="radio"][name="planet"] {
+  display: none;
+}
+
+.menu {
+  position: absolute;
+  left: 40px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: #e4deff;
+  opacity: 0.45;
+  transform: translateX(0);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.menu:nth-of-type(1) { top: 130px; }
+.menu:nth-of-type(2) { top: 170px; }
+.menu:nth-of-type(3) { top: 210px; }
+.menu:nth-of-type(4) { top: 250px; }
+.menu:nth-of-type(5) { top: 290px; }
+.menu:nth-of-type(6) { top: 330px; }
+.menu:nth-of-type(7) { top: 370px; }
+.menu:nth-of-type(8) { top: 410px; }
+.menu:nth-of-type(9) { top: 450px; }
+
+.menu .preview {
+  width: 26px;
+  height: 26px;
+  border-radius: 100%;
+  margin-right: 16px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+  background-size: cover;
+  background-position: center;
+}
+
+.menu .info h2 {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.menu .info h3 {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  opacity: 0.6;
+  margin-top: 2px;
+}
+
+.menu .pip {
+  display: inline-block;
+  width: 0;
+  height: 10px;
+  border-radius: 4px;
+  background: #ff9b4a;
+  transition: width 0.3s ease;
+}
+
+.menu.mercury .preview {
+  background-image: url("https://www.solarsystemscope.com/images/textures/full/2k_mercury.jpg");
+}
+.menu.venus .preview {
+  background-image: url("https://www.solarsystemscope.com/images/textures/full/2k_venus_atmosphere.jpg");
+}
+.menu.earth .preview {
+  background-image: url("https://www.solarsystemscope.com/images/textures/full/2k_earth_daymap.jpg");
+}
+.menu.mars .preview {
+  background-image: url("https://www.solarsystemscope.com/images/textures/full/2k_mars.jpg");
+}
+.menu.jupiter .preview {
+  background-image: url("https://www.solarsystemscope.com/images/textures/full/2k_jupiter.jpg");
+}
+.menu.saturn .preview {
+  background-image: url("https://www.solarsystemscope.com/images/textures/full/2k_saturn.jpg");
+}
+.menu.uranus .preview {
+  background-image: url("https://www.solarsystemscope.com/images/textures/full/2k_uranus.jpg");
+}
+.menu.neptune .preview {
+  background-image: url("https://www.solarsystemscope.com/images/textures/full/2k_neptune.jpg");
+}
+.menu.pluto .preview {
+  background-image: url("https://www.solarsystemscope.com/images/textures/full/2k_pluto.jpg");
+}
+
+#mercury:checked + .menu.mercury,
+#venus:checked + .menu.venus,
+#earth:checked + .menu.earth,
+#mars:checked + .menu.mars,
+#jupiter:checked + .menu.jupiter,
+#saturn:checked + .menu.saturn,
+#uranus:checked + .menu.uranus,
+#neptune:checked + .menu.neptune,
+#pluto:checked + .menu.pluto {
+  opacity: 1;
+  transform: translateX(6px);
+}
+
+#mercury:checked + .menu.mercury .pip,
+#venus:checked + .menu.venus .pip,
+#earth:checked + .menu.earth .pip,
+#mars:checked + .menu.mars .pip,
+#jupiter:checked + .menu.jupiter .pip,
+#saturn:checked + .menu.saturn .pip,
+#uranus:checked + .menu.uranus .pip,
+#neptune:checked + .menu.neptune .pip,
+#pluto:checked + .menu.pluto .pip {
+  width: 24px;
+}
+
+.solar {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+}
+
+.planet {
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  opacity: 0;
+  transform: translateZ(-260px) scale(0.75) translateY(10px);
+  filter: blur(4px);
+  pointer-events: none;
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1),
+    filter 0.9s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.planet-sphere {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  position: relative;
+  background-size: 260% 100%;
+  background-position: 0% 50%;
+  box-shadow:
+    0 40px 80px rgba(0, 0, 0, 0.9),
+    inset -18px -18px 40px rgba(0, 0, 0, 0.9),
+    inset 16px 16px 30px rgba(255, 255, 255, 0.25);
+  animation: spinTexture 28s linear infinite;
+}
+
+.planet-sphere::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.35), transparent 55%);
+  mix-blend-mode: screen;
+}
+
+.planet-info {
+  max-width: 260px;
+}
+
+.planet-info h2 {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #ff9b4a;
+  margin-bottom: 4px;
+  font-weight: 400;
+}
+
+.planet-info h1 {
+  font-size: 26px;
+  text-transform: uppercase;
+  letter-spacing: 6px;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.planet-info p {
+  font-size: 12px;
+  line-height: 1.7;
+  color: #d4ceff;
+}
+
+.planet.mercury .planet-sphere {
+  background-image: url("https://www.solarsystemscope.com/images/textures/full/2k_mercury.jpg");
+}
+.planet.venus .planet-sphere {
+  background-image: url("https://www.solarsystemscope.com/images/textures/full/2k_venus_atmosphere.jpg");
+}
+.planet.earth .planet-sphere {
+  background-image: url("https://www.solarsystemscope.com/images/textures/full/2k_earth_daymap.jpg");
+}
+.planet.mars .planet-sphere {
+  background-image: url("https://www.solarsystemscope.com/images/textures/full/2k_mars.jpg");
+}
+.planet.jupiter .planet-sphere {
+  background-image: url("https://www.solarsystemscope.com/images/textures/full/2k_jupiter.jpg");
+}
+.planet.saturn .planet-sphere {
+  background-image: url("https://www.solarsystemscope.com/images/textures/full/2k_saturn.jpg");
+}
+.planet.uranus .planet-sphere {
+  background-image: url("https://www.solarsystemscope.com/images/textures/full/2k_uranus.jpg");
+}
+.planet.neptune .planet-sphere {
+  background-image: url("https://www.solarsystemscope.com/images/textures/full/2k_neptune.jpg");
+}
+.planet.pluto .planet-sphere {
+  background-image: url("https://www.solarsystemscope.com/images/textures/full/2k_pluto.jpg");
+}
+
+#mercury:checked ~ .solar .planet.mercury,
+#venus:checked ~ .solar .planet.venus,
+#earth:checked ~ .solar .planet.earth,
+#mars:checked ~ .solar .planet.mars,
+#jupiter:checked ~ .solar .planet.jupiter,
+#saturn:checked ~ .solar .planet.saturn,
+#uranus:checked ~ .solar .planet.uranus,
+#neptune:checked ~ .solar .planet.neptune,
+#pluto:checked ~ .solar .planet.pluto {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateZ(0) scale(1) translateY(0);
+  pointer-events: auto;
+}
+
+@keyframes spinTexture {
+  from {
+    background-position-x: 0%;
+  }
+  to {
+    background-position-x: -260%;
+  }
+}
+
+@media (max-width: 900px) {
+  .planet {
+    flex-direction: column;
+    width: 90%;
+    height: auto;
+    transform: translateZ(-220px) scale(0.75) translateY(10px);
+  }
+
+  .planet-info {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .menu {
+    left: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .planet-sphere {
+    width: 180px;
+    height: 180px;
+  }
+
+  .planet-info h1 {
+    font-size: 20px;
+    letter-spacing: 4px;
+  }
+
+  .planet-info p {
+    font-size: 11px;
+  }
+}
